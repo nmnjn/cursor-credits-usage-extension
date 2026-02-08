@@ -22,8 +22,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "cursor-credits-usage.helloWorld",
-        "title": "Hello World"
+        "command": "cursor-credits-usage.captureCookie",
+        "title": "Cursor Credits Usage: Set Cookie"
+      },
+      {
+        "command": "cursor-credits-usage.refreshUsage",
+        "title": "Cursor Credits Usage: Refresh Usage"
       }
     ]
   },

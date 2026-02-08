@@ -1,26 +1,93 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as statusBar from "./statusBar";
+import { fetchUsageSummary } from "./cursor-api";
+import { CAPTURE_COOKIE_COMMAND, COOKIE_STORAGE_KEY, REFRESH_USAGE_COMMAND } from "./constants";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+	statusBar.createStatusBarItem();
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "cursor-credits-usage" is now active!');
+	const captureCookieCmd = vscode.commands.registerCommand(
+		CAPTURE_COOKIE_COMMAND,
+		() => captureCookie(context)
+	);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('cursor-credits-usage.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Cursor Credits Usage!');
-	});
+	const refreshUsageCmd = vscode.commands.registerCommand(
+		REFRESH_USAGE_COMMAND,
+		() => refreshUsage(context)
+	);
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(
+		statusBar.getStatusBarItem(),
+		captureCookieCmd,
+		refreshUsageCmd,
+	);
+
+	refreshUsage(context);
 }
+
+
+/**
+ * Prompts the user for their WorkosCursorSessionToken cookie value
+ * and stores it in VS Code's SecretStorage.
+ */
+async function captureCookie(context: vscode.ExtensionContext): Promise<void> {
+	try {
+	  const cookieValue = await vscode.window.showInputBox({
+		prompt: "Enter your WorkosCursorSessionToken cookie value. (Login to cursor.com and open the developer tools. Go to Application -> Cookies -> https://cursor.com -> Copy the value of WorkosCursorSessionToken)",
+		placeHolder: "Paste cookie value here...",
+		password: true,
+		ignoreFocusOut: true,
+	  });
+  
+	  if (cookieValue && cookieValue.trim()) {
+		await context.secrets.store(
+		  COOKIE_STORAGE_KEY,
+		  cookieValue.trim()
+		);
+		vscode.window.showInformationMessage(
+		  "Cursor cookie saved successfully! Fetching usage data..."
+		);
+		await refreshUsage(context);
+	  } else {
+		vscode.window.showWarningMessage("No cookie value provided.");
+	  }
+	} catch (error: any) {
+	  console.error(
+		`[Cursor Credits Usage] Failed to save cookie: ${error.message}`
+	  );
+	  vscode.window.showErrorMessage(`Failed to save cookie: ${error.message}`);
+	}
+  }
+
+/**
+ * Fetches usage summary from the Cursor API and updates the status bar.
+ */
+async function refreshUsage(context: vscode.ExtensionContext): Promise<void> {  
+	try {
+	  const cookie = await context.secrets.get(COOKIE_STORAGE_KEY);
+	  if (!cookie) {
+		statusBar.changeToSetCookieStatusBar();
+		vscode.window.showWarningMessage(
+		  'Cursor cookie not set. Run "Cursor Credits Usage: Set Cookie" from the command palette.'
+		);
+		return;
+	  }
+  
+	  const summary = await fetchUsageSummary(cookie);
+	  const bucket = summary.individualUsage.overall || summary.individualUsage.plan || summary.individualUsage.onDemand;
+  
+	  console.log(
+		`[Cursor Credits Usage] Used: ${bucket.used}, Remaining: ${bucket.remaining}, Limit: ${bucket.limit}`
+	  );
+  
+	  statusBar.updateStatusBar(bucket, summary.billingCycleEnd);
+	} catch (error: any) {
+	  statusBar.setError("Refresh Failed");
+	  vscode.window.showErrorMessage(`Failed to refresh usage: ${error.message}`);
+	}
+  }
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
