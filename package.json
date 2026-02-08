@@ -28,8 +28,23 @@
       {
         "command": "cursor-credits-usage.refreshUsage",
         "title": "Cursor Credits Usage: Refresh Usage"
+      },
+      {
+        "command": "cursor-credits-usage.setPollingInterval",
+        "title": "Cursor Credits Usage: Set Polling Interval for Auto Refresh"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Cursor Credits Usage",
+      "properties": {
+        "cursorCreditsUsage.pollIntervalMinutes": {
+          "type": "number",
+          "default": 5,
+          "description": "How often to automatically refresh the usage data (in minutes)",
+          "minimum": 1
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
