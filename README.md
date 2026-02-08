@@ -14,7 +14,24 @@ Track your Cursor AI credits usage directly in the Cursor IDE status bar. See ho
 
 ## Getting Started
 
-### 1. Set your cookie
+### 1. Install the extension
+
+**From the UI**
+
+- Download the latest extension file [cursor-credits-usage-0.0.1.vsix](https://github.com/nmnjn/cursor-credits-usage-extension/releases/download/0.0.1/cursor-credits-usage-0.0.1.vsix).
+- In Cursor, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`), run **Extensions: Install from VSIX**, and select the downloaded file.
+
+**One-command install (CLI)**
+
+Download and install in one go (macOS/Linux):
+
+```bash
+curl -L -o /tmp/cursor-credits-usage.vsix "https://github.com/nmnjn/cursor-credits-usage-extension/releases/download/0.0.1/cursor-credits-usage-0.0.1.vsix" && cursor --install-extension /tmp/cursor-credits-usage.vsix
+```
+
+Restart Cursor after installing if the extension doesn’t appear.
+
+### 2. Set your cookie
 
 The extension needs your Cursor session to fetch usage. One-time setup:
 
@@ -26,7 +43,7 @@ The extension needs your Cursor session to fetch usage. One-time setup:
    - Copy the value of **WorkosCursorSessionToken**.
 4. Paste the value when prompted. It is stored securely and used only to call the Cursor usage API.
 
-### 2. View usage
+### 3. View usage
 
 After the cookie is set, the status bar shows your usage (e.g. `$4.50 / $20.00`). Click the status bar item anytime to refresh. If the cookie isn’t set, the status bar shows **Set Cookie** — click it to run the setup.
 
