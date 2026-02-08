@@ -2,6 +2,8 @@
 
 Track your Cursor AI credits usage directly in the Cursor IDE status bar. See how much you've used, how much remains, and when your billing cycle resets—without leaving the editor.
 
+![Preview Image](/assets/preview_image.png)
+
 ## Features
 
 - **Status bar display** — Shows used vs. limit (e.g. `$4.50 / $20.00`) in the bottom-left status bar. Click it to refresh.
