@@ -11,53 +11,50 @@ const USAGE_SUMMARY_URL = "https://cursor.com/api/usage-summary";
  * @returns The parsed usage summary response.
  */
 export async function fetchUsageSummary(
-    cookie: string
+  cookie: string,
 ): Promise<UsageSummaryResponse> {
-    const options: https.RequestOptions = {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Cookie: `WorkosCursorSessionToken=${cookie}`,
-            Origin: "https://cursor.com",
-        },
-    };
+  const options: https.RequestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `WorkosCursorSessionToken=${cookie}`,
+      Origin: "https://cursor.com",
+    },
+  };
 
-    return new Promise<UsageSummaryResponse>((resolve, reject) => {
-        const req = https.request(USAGE_SUMMARY_URL, options, (res) => {
-            let data = "";
+  return new Promise<UsageSummaryResponse>((resolve, reject) => {
+    const req = https.request(USAGE_SUMMARY_URL, options, (res) => {
+      let data = "";
 
-            res.on("data", (chunk) => {
-                data += chunk;
-            });
+      res.on("data", (chunk) => {
+        data += chunk;
+      });
 
-            res.on("end", () => {
-                try {
-                    if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-                        const parsed = JSON.parse(data) as UsageSummaryResponse;
-                        resolve(parsed);
-                    } else {
-                        console.error(
-                            `[Cursor Usage Stats] HTTP ${res.statusCode}: ${data}`
-                        );
-                        reject(new Error(`HTTP ${res.statusCode}: ${data}`));
-                    }
-                } catch (error) {
-                    console.error(
-                        `[Cursor Usage Stats] Failed to parse response: ${error}`
-                    );
-                    reject(new Error(`Failed to parse response: ${error}`));
-                }
-            });
-        });
-
-        req.on("error", (error) => {
+      res.on("end", () => {
+        try {
+          if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
+            const parsed = JSON.parse(data) as UsageSummaryResponse;
+            resolve(parsed);
+          } else {
             console.error(
-                `[Cursor Usage Stats] Request failed: ${error.message}`
+              `[Cursor Usage Stats] HTTP ${res.statusCode}: ${data}`,
             );
-            reject(error);
-        });
-
-        req.end();
+            reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+          }
+        } catch (error) {
+          console.error(
+            `[Cursor Usage Stats] Failed to parse response: ${error}`,
+          );
+          reject(new Error(`Failed to parse response: ${error}`));
+        }
+      });
     });
-}
 
+    req.on("error", (error) => {
+      console.error(`[Cursor Usage Stats] Request failed: ${error.message}`);
+      reject(error);
+    });
+
+    req.end();
+  });
+}
