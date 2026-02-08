@@ -1,15 +1,23 @@
 {
   "name": "cursor-credits-usage",
   "displayName": "Cursor Credits Usage",
-  "description": "Track Cursor credits usage directly from the Cursor IDE status bar",
+  "description": "Track your Cursor AI credits usage in the Cursor IDE status bar",
   "version": "0.0.1",
+  "license": "MIT",
+  "publisher": "Naman Jain",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nmnjn/cursor-credits-usage-extension"
+  },
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.74.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -28,7 +36,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.109.0",
+    "@types/vscode": "^1.74.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "typescript-eslint": "^8.54.0",

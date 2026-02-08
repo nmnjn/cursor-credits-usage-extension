@@ -165,7 +165,7 @@
   dependencies:
     undici-types "~6.21.0"
 
-"@types/vscode@^1.109.0":
+"@types/vscode@^1.74.0":
   version "1.109.0"
   resolved "https://registry.yarnpkg.com/@types/vscode/-/vscode-1.109.0.tgz#062dfddf5f7df9cf36038e900ae67421ae69091b"
   integrity sha512-0Pf95rnwEIwDbmXGC08r0B4TQhAbsHQ5UyTIgVgoieDe4cOnf92usuR5dEczb6bTKEp7ziZH4TV1TRGPPCExtw==
