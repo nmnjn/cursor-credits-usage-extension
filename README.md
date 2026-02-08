@@ -1,71 +1,71 @@
-# cursor-credits-usage README
+# Cursor Credits Usage
 
-This is the README for your extension "cursor-credits-usage". After writing up a brief description, we recommend including the following sections.
+Track your Cursor AI credits usage directly in the Cursor IDE status bar. See how much you've used, how much remains, and when your billing cycle resets—without leaving the editor.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Status bar display** — Shows used vs. limit (e.g. `$4.50 / $20.00`) in the bottom-left status bar. Click it to refresh.
+- **Visual alerts** — Icon and background change as you approach your limit (warning at 80%, error at 95%).
+- **Rich tooltip** — Hover over the status bar item to see remaining balance, usage percentage, and billing cycle end date.
+- **Auto refresh** — Usage is refreshed automatically at a configurable interval (default: 5 minutes).
+- **Secure storage** — Your session cookie is stored in the editor’s Secret Storage and never written to disk in plain text.
 
-For example if there is an image subfolder under your extension project workspace:
+## Getting Started
 
-\!\[feature X\]\(images/feature-x.png\)
+### 1. Set your cookie
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+The extension needs your Cursor session to fetch usage. One-time setup:
 
-## Requirements
+1. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`).
+2. Run **Cursor Credits Usage: Set Cookie**.
+3. Get your cookie:
+   - Log in at [cursor.com](https://cursor.com).
+   - Open Developer Tools (e.g. **Application** → **Cookies** → `https://cursor.com`).
+   - Copy the value of **WorkosCursorSessionToken**.
+4. Paste the value when prompted. It is stored securely and used only to call the Cursor usage API.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### 2. View usage
+
+After the cookie is set, the status bar shows your usage (e.g. `$4.50 / $20.00`). Click the status bar item anytime to refresh. If the cookie isn’t set, the status bar shows **Set Cookie** — click it to run the setup.
+
+## Commands
+
+| Command | Description |
+|--------|-------------|
+| **Cursor Credits Usage: Set Cookie** | Prompt to enter and save your WorkosCursorSessionToken. |
+| **Cursor Credits Usage: Refresh Usage** | Manually fetch and update usage in the status bar. |
+| **Cursor Credits Usage: Set Polling Interval** | Set how often (in minutes) usage is auto-refreshed. |
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+| Setting | Type | Default | Description |
+|--------|------|--------|-------------|
+| `cursorCreditsUsage.pollIntervalMinutes` | number | `5` | How often to automatically refresh usage (minutes). Minimum: 1. |
 
-For example:
+You can also change the polling interval via the command **Cursor Credits Usage: Set Polling Interval**.
 
-This extension contributes the following settings:
+## Requirements
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- **Cursor IDE** (or VS Code) 1.74.0 or newer.
+- A Cursor account; you must be able to log in at [cursor.com](https://cursor.com) to obtain the session cookie.
+
+## Privacy & Security
+
+- The extension only uses your cookie to call `https://cursor.com/api/usage-summary`.
+- The cookie is stored in the editor’s Secret Storage API and is not written to disk in plain text.
+- No usage data is sent to any third party.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- If you log out or your Cursor session expires, usage will fail to load. Run **Cursor Credits Usage: Set Cookie** again with a fresh token.
+- The Cursor usage API may change; if the status bar stops updating, a new cookie and/or extension update may be required.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release: status bar usage display, cookie setup, manual refresh, and configurable auto-refresh.
 
 ---
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
