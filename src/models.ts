@@ -39,3 +39,9 @@ export interface UsageSummaryResponse {
   individualUsage: IndividualUsage;
   teamUsage?: TeamUsage;
 }
+
+
+export interface CursorAuthCredentials {
+  userId: string;
+  accessToken: string;
+}

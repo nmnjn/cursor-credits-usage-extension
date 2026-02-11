@@ -2,7 +2,8 @@
   "name": "cursor-credits-usage",
   "displayName": "Cursor Credits Usage",
   "description": "Track your Cursor AI credits usage in the Cursor IDE status bar",
-  "version": "0.0.1",
+  "icon": "assets/icon.png",
+  "version": "0.0.2",
   "license": "MIT",
   "publisher": "nmnjn",
   "repository": {
@@ -21,10 +22,6 @@
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "cursor-credits-usage.captureCookie",
-        "title": "Cursor Credits Usage: Set Cookie"
-      },
       {
         "command": "cursor-credits-usage.refreshUsage",
         "title": "Cursor Credits Usage: Refresh Usage"

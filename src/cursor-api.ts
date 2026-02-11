@@ -1,18 +1,19 @@
 import * as https from "https";
-import { UsageSummaryResponse } from "./models";
+import { CursorAuthCredentials, UsageSummaryResponse } from "./models";
+import { getAuthCredentials } from "./stateStore";
 
 const USAGE_SUMMARY_URL = "https://cursor.com/api/usage-summary";
 
 /**
  * Fetches usage summary from the Cursor API.
  * Uses the WorkosCursorSessionToken cookie for authentication
- *
- * @param cookie The WorkosCursorSessionToken value.
  * @returns The parsed usage summary response.
  */
-export async function fetchUsageSummary(
-  cookie: string,
-): Promise<UsageSummaryResponse> {
+export async function fetchUsageSummary(): Promise<UsageSummaryResponse> {
+
+  const credentials = getAuthCredentials();
+  const cookie = buildAuthCookie(credentials);
+
   const options: https.RequestOptions = {
     method: "GET",
     headers: {
@@ -57,4 +58,11 @@ export async function fetchUsageSummary(
 
     req.end();
   });
+}
+
+/**
+ * Builds the cookie string required for Cursor API authentication.
+ */
+function buildAuthCookie(credentials: CursorAuthCredentials) {
+  return `WorkosCursorSessionToken=${credentials.userId}::${credentials.accessToken}`;
 }
