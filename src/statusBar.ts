@@ -1,5 +1,5 @@
 import { window, StatusBarAlignment, StatusBarItem, ThemeColor } from "vscode";
-import { CAPTURE_COOKIE_COMMAND, REFRESH_USAGE_COMMAND } from "./constants";
+import { REFRESH_USAGE_COMMAND } from "./constants";
 import { UsageBucket } from "./models";
 
 let statusBarItem: StatusBarItem;
@@ -10,15 +10,6 @@ export function createStatusBarItem(): void {
   statusBarItem.tooltip = "Cursor Credits Usage — click to refresh usage data";
   statusBarItem.text = "$(zap)";
   statusBarItem.show();
-}
-
-export function changeToSetCookieStatusBar(): void {
-  if (!statusBarItem) {
-    return;
-  }
-  statusBarItem.text = "$(warning) Set Cookie";
-  statusBarItem.tooltip = "Cursor Credits Usage — click to set cookie";
-  statusBarItem.command = CAPTURE_COOKIE_COMMAND;
 }
 
 export function setError(message: string): void {
