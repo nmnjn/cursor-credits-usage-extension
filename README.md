@@ -15,20 +15,16 @@ Track your Cursor AI credits usage directly in the Cursor IDE status bar. See ho
 
 ### 1. Install the extension
 
-**From the UI**
+This extension is published on [Open-VSX](https://open-vsx.org/extension/nmnjn/cursor-credits-usage).
 
-- Download the latest extension file [cursor-credits-usage-0.0.1.vsix](https://github.com/nmnjn/cursor-credits-usage-extension/releases/download/0.0.1/cursor-credits-usage-0.0.1.vsix).
-- In Cursor, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`), run **Extensions: Install from VSIX**, and select the downloaded file.
+You can install the extension by searching "Cursor Credits Usage" in Cursor's Extension Marketplace.
 
+Or via 
 **One-command install (CLI)**
 
-Download and install in one go (macOS/Linux):
-
 ```bash
-curl -L -o /tmp/cursor-credits-usage.vsix "https://github.com/nmnjn/cursor-credits-usage-extension/releases/download/0.0.1/cursor-credits-usage-0.0.1.vsix" && cursor --install-extension /tmp/cursor-credits-usage.vsix
+curl -L -o /tmp/cursor-credits-usage.vsix "https://open-vsx.org/api/nmnjn/cursor-credits-usage/0.0.3/file/nmnjn.cursor-credits-usage-0.0.3.vsix" && cursor --install-extension /tmp/cursor-credits-usage.vsix
 ```
-
-Restart Cursor after installing if the extension doesn’t appear.
 
 ### 2. View usage
 
@@ -52,7 +48,7 @@ You can also change the polling interval via the command **Cursor Credits Usage:
 ## Requirements
 
 - **Cursor IDE** (or VS Code) 1.74.0 or newer.
-- A Cursor account; you must be able to logged in to your Cursor IDE with your [cursor.com](https://cursor.com) account.
+- A Cursor account; you must be logged in to your Cursor IDE with your [cursor.com](https://cursor.com) account.
 
 ## Privacy & Security
 

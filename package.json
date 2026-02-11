@@ -3,7 +3,7 @@
   "displayName": "Cursor Credits Usage",
   "description": "Track your Cursor AI credits usage in the Cursor IDE status bar",
   "icon": "assets/icon.png",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "publisher": "nmnjn",
   "repository": {
