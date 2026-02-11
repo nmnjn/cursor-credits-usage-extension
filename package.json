@@ -4,7 +4,7 @@
   "description": "Track your Cursor AI credits usage in the Cursor IDE status bar",
   "version": "0.0.1",
   "license": "MIT",
-  "publisher": "naman-jain",
+  "publisher": "nmnjn",
   "repository": {
     "type": "git",
     "url": "https://github.com/nmnjn/cursor-credits-usage-extension"
