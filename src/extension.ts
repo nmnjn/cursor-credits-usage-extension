@@ -7,6 +7,7 @@ import {
   POLLING_INTERVAL_CONFIG_KEY,
   REFRESH_USAGE_COMMAND,
   SET_POLLING_INTERVAL_COMMAND,
+  TOGGLE_DISPLAY_MODE_COMMAND,
 } from "./constants";
 
 let refreshTimer: NodeJS.Timeout | undefined;
@@ -14,7 +15,7 @@ let refreshTimer: NodeJS.Timeout | undefined;
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  statusBar.createStatusBarItem();
+  statusBar.createStatusBarItem(context);
 
   const refreshUsageCmd = vscode.commands.registerCommand(
     REFRESH_USAGE_COMMAND,
@@ -26,10 +27,16 @@ export function activate(context: vscode.ExtensionContext) {
     () => setPollingInterval(context),
   );
 
+  const toggleDisplayModeCmd = vscode.commands.registerCommand(
+    TOGGLE_DISPLAY_MODE_COMMAND,
+    () => statusBar.toggleDisplayMode(),
+  );
+
   context.subscriptions.push(
     statusBar.getStatusBarItem(),
     refreshUsageCmd,
     setPollingIntervalCmd,
+    toggleDisplayModeCmd,
   );
 
   refreshUsage(context);

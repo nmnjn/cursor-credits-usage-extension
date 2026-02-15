@@ -7,8 +7,9 @@ Track your Cursor AI credits usage directly in the Cursor IDE status bar. See ho
 ## Features
 
 - **Status bar display** — Shows used vs. limit (e.g. `$4.50 / $20.00`) in the bottom-left status bar. Click it to refresh.
+- **Toggle display mode** — Switch between **Cost** (`$4.50 / $20.00`) and **Percentage** (`22.5% used`) views. Your choice is persisted across sessions.
 - **Visual alerts** — Icon and background change as you approach your limit (warning at 80%, error at 95%).
-- **Rich tooltip** — Hover over the status bar item to see remaining balance, usage percentage, and billing cycle end date.
+- **Rich tooltip** — Hover over the status bar item to see a detailed breakdown of usage, remaining balance, billing cycle info, and a link to toggle the display mode.
 - **Auto refresh** — Usage is refreshed automatically at a configurable interval (default: 5 minutes).
 
 ## Getting Started
@@ -28,7 +29,7 @@ curl -L -o /tmp/cursor-credits-usage.vsix "https://open-vsx.org/api/nmnjn/cursor
 
 ### 2. View usage
 
-The status bar shows your usage (e.g. `$4.50 / $20.00`). Click the status bar item anytime to refresh.
+The status bar shows your usage (e.g. `$4.50 / $20.00`). Click the status bar item anytime to refresh. Hover to see a detailed tooltip with a toggle to switch between cost and percentage display.
 
 ## Commands
 
@@ -36,6 +37,7 @@ The status bar shows your usage (e.g. `$4.50 / $20.00`). Click the status bar it
 |--------|-------------|
 | **Cursor Credits Usage: Refresh Usage** | Manually fetch and update usage in the status bar. |
 | **Cursor Credits Usage: Set Polling Interval** | Set how often (in minutes) usage is auto-refreshed. |
+| **Cursor Credits Usage: Toggle Display Mode** | Switch between Cost and Percentage display in the status bar. |
 
 ## Extension Settings
 
@@ -58,6 +60,13 @@ You can also change the polling interval via the command **Cursor Credits Usage:
 
 
 ## Release Notes
+
+### 0.0.4
+
+- Added toggle display mode — switch between **Cost** and **Percentage** views directly from the tooltip or via the command palette.
+- Display mode preference is persisted across sessions.
+- Tooltip redesigned with a rich markdown layout including a usage table, billing cycle info, and a clickable toggle link.
+- Fixed authentication cookie format for improved compatibility.
 
 ### 0.0.2
 Automatically fetches the authentication token from Cursors State SQLite DB, instead of manually asking user to set WorkosCursorSessionToken.

@@ -3,7 +3,7 @@
   "displayName": "Cursor Credits Usage",
   "description": "Track your Cursor AI credits usage in the Cursor IDE status bar",
   "icon": "assets/icon.png",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "publisher": "nmnjn",
   "repository": {
@@ -29,6 +29,10 @@
       {
         "command": "cursor-credits-usage.setPollingInterval",
         "title": "Cursor Credits Usage: Set Polling Interval for Auto Refresh"
+      },
+      {
+        "command": "cursor-credits-usage.toggleDisplayMode",
+        "title": "Cursor Credits Usage: Toggle Display Mode (Cost / Percentage)"
       }
     ],
     "configuration": {
