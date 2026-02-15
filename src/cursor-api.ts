@@ -18,7 +18,7 @@ export async function fetchUsageSummary(): Promise<UsageSummaryResponse> {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Cookie: `WorkosCursorSessionToken=${cookie}`,
+      Cookie: `${cookie}`,
       Origin: "https://cursor.com",
     },
   };
