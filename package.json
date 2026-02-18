@@ -3,7 +3,7 @@
   "displayName": "Cursor Credits Usage",
   "description": "Track your Cursor AI credits usage in the Cursor IDE status bar",
   "icon": "assets/icon.png",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "publisher": "nmnjn",
   "repository": {
@@ -40,7 +40,7 @@
       "properties": {
         "cursorCreditsUsage.pollIntervalMinutes": {
           "type": "number",
-          "default": 5,
+          "default": 3,
           "description": "How often to automatically refresh the usage data (in minutes)",
           "minimum": 1
         }

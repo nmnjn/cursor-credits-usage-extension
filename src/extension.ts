@@ -60,8 +60,15 @@ async function refreshUsage(context: vscode.ExtensionContext): Promise<void> {
 
     statusBar.updateStatusBar(bucket, summary.billingCycleEnd);
   } catch (error: any) {
-    statusBar.setError("Refresh Failed");
-    vscode.window.showErrorMessage(`Failed to refresh usage: ${error.message}`);
+    const isAuthError =
+      error.message?.includes("HTTP 401") ||
+      error.message?.includes("HTTP 403");
+
+    if (isAuthError) {
+      statusBar.setUnauthenticated();
+    } else {
+      statusBar.setError("Refresh Failed");
+    }
   }
 }
 

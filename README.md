@@ -10,7 +10,7 @@ Track your Cursor AI credits usage directly in the Cursor IDE status bar. See ho
 - **Toggle display mode** — Switch between **Cost** (`$4.50 / $20.00`) and **Percentage** (`22.5% used`) views. Your choice is persisted across sessions.
 - **Visual alerts** — Icon and background change as you approach your limit (warning at 80%, error at 95%).
 - **Rich tooltip** — Hover over the status bar item to see a detailed breakdown of usage, remaining balance, billing cycle info, and a link to toggle the display mode.
-- **Auto refresh** — Usage is refreshed automatically at a configurable interval (default: 5 minutes).
+- **Auto refresh** — Usage is refreshed automatically at a configurable interval (default: 3 minutes).
 
 ## Getting Started
 
@@ -18,13 +18,9 @@ Track your Cursor AI credits usage directly in the Cursor IDE status bar. See ho
 
 This extension is published on [Open-VSX](https://open-vsx.org/extension/nmnjn/cursor-credits-usage).
 
-You can install the extension by searching "Cursor Credits Usage" in Cursor's Extension Marketplace.
+You can install the extension by searching "Cursor Credits Usage" in Cursor's Extension Marketplace or [directly clicking this link to view it in Cursor Marketplace](https://redirecting.you/to/cursor-credits-usage-extension)
 
-Or via 
-**One-command install (CLI)**
 
-```bash
-curl -L -o /tmp/cursor-credits-usage.vsix "https://open-vsx.org/api/nmnjn/cursor-credits-usage/0.0.3/file/nmnjn.cursor-credits-usage-0.0.3.vsix" && cursor --install-extension /tmp/cursor-credits-usage.vsix
 ```
 
 ### 2. View usage
@@ -60,6 +56,12 @@ You can also change the polling interval via the command **Cursor Credits Usage:
 
 
 ## Release Notes
+
+### 0.0.5
+
+- Added session expiry detection — HTTP 401/403 errors now show a dedicated **Session Expired** status bar item with a tooltip guiding users to re-login.
+- Changed default auto-refresh polling interval from 5 minutes to 3 minutes.
+- Cleaner status bar — removed the default icon for normal usage levels.
 
 ### 0.0.4
 

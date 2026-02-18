@@ -6,7 +6,10 @@ import {
   MarkdownString,
   ExtensionContext,
 } from "vscode";
-import { REFRESH_USAGE_COMMAND, TOGGLE_DISPLAY_MODE_COMMAND } from "./constants";
+import {
+  REFRESH_USAGE_COMMAND,
+  TOGGLE_DISPLAY_MODE_COMMAND,
+} from "./constants";
 import { UsageBucket } from "./models";
 
 type DisplayMode = "cost" | "percentage";
@@ -85,6 +88,8 @@ export function updateStatusBar(
     statusBarItem.backgroundColor = new ThemeColor(
       "statusBarItem.warningBackground",
     );
+  } else {
+    icon = "";
   }
 
   const dollarString = function (amount: number): string {
@@ -141,6 +146,32 @@ export function updateStatusBar(
     `` +
       `[$(sync)&nbsp;&nbsp;Change display mode to ${nextMode}](command:${TOGGLE_DISPLAY_MODE_COMMAND})`,
   );
+
+  statusBarItem.tooltip = tooltip;
+}
+
+export function setUnauthenticated(): void {
+  if (!statusBarItem) {
+    return;
+  }
+  statusBarItem.text = "$(error) Session Expired";
+  statusBarItem.backgroundColor = new ThemeColor(
+    "statusBarItem.errorBackground",
+  );
+  statusBarItem.command = REFRESH_USAGE_COMMAND;
+
+  const tooltip = new MarkdownString(undefined, true);
+
+  tooltip.appendMarkdown(`### $(error) Cursor Credits Usage: Session Expired\n\n`);
+  tooltip.appendMarkdown(`---\n\n`);
+  tooltip.appendMarkdown(
+    `It seems like your Cursor session has expired.\n\n` +
+      `Please **logout** and **login** again from Cursor Settings to refresh your credentials.\n\n`,
+  );
+  tooltip.appendMarkdown(`---\n\n`);
+  // tooltip.appendMarkdown(
+  //   `[$(gear)&nbsp;&nbsp;Open Cursor Settings](command:${OPEN_CURSOR_SETTINGS_COMMAND})`,
+  // );
 
   statusBarItem.tooltip = tooltip;
 }
