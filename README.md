@@ -21,8 +21,6 @@ This extension is published on [Open-VSX](https://open-vsx.org/extension/nmnjn/c
 You can install the extension by searching "Cursor Credits Usage" in Cursor's Extension Marketplace or [directly clicking this link to view it in Cursor Marketplace](https://redirecting.you/to/cursor-credits-usage-extension)
 
 
-```
-
 ### 2. View usage
 
 The status bar shows your usage (e.g. `$4.50 / $20.00`). Click the status bar item anytime to refresh. Hover to see a detailed tooltip with a toggle to switch between cost and percentage display.
